@@ -1,8 +1,53 @@
 <!DOCTYPE html>
-<html>
-  <body>
-    <script type="text/javascript" src="./script.js">
-</script>
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sharable URLs</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input, button {
+      margin: 10px 0;
+      padding: 8px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+   <h3 id="url">https://localhost:8080/</h3>
+  <form id="urlForm" onsubmit="return false;">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" placeholder="Enter your name"><br>
+    <label for="year">Year:</label><br>
+    <input type="number" id="year" name="year" placeholder="Enter year"><br>
+    <button id="button">Submit</button>
+  </form>
+ 
 
+  <script>
+    document.getElementById("button").addEventListener("click", function () {
+      const name = document.getElementById("name").value.trim();
+      const year = document.getElementById("year").value.trim();
+      
+      let url = "https://localhost:8080/";
+      const params = [];
+
+      if (name) {
+        params.push(`name=${encodeURIComponent(name)}`);
+      }
+      if (year) {
+        params.push(`year=${encodeURIComponent(year)}`);
+      }
+
+      if (params.length > 0) {
+        url += `?${params.join("&")}`;
+      }
+
+      document.getElementById("url").textContent = url;
+    });
+  </script>
+</body>
 </html>
